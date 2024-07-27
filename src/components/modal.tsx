@@ -10,18 +10,28 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
+    width: 500,
+    bgcolor: '#E0D9CF',
     boxShadow: 24,
     p: 4,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center"
 };
 
-const Modals = () => {
-    const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
-    
+interface ModalProps {
+    cardDetails: any,
+    open: boolean
+    handleClose: () => void;
+}
+
+const Modals = (props: ModalProps) => {
+    const { open, cardDetails, handleClose } = props
+    // const [open, setOpen] = useState(false);
+    // const handleOpen = () => setOpen(true);
+    // const handleClose = () => setOpen(false);
+
     return (
         <Modal
             open={open}
@@ -30,12 +40,16 @@ const Modals = () => {
             aria-describedby="modal-modal-description"
         >
             <Box sx={style}>
-                <Typography id="modal-modal-title" variant="h6" component="h2">
-                    Text in a modal
-                </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                </Typography>
+                <Box sx={{ width: "100%", '& img': { width: { xs: "100%", sm: "300px" } } }}>
+                    <img src={cardDetails.image} loading="eager" alt={cardDetails.title} className="h-[180px] rounded-xl bg-cover object-cover object-center bg-center" />
+                </Box>
+                <div className="mt-[1rem] w-full">
+                    <h2 className="text-[1rem] font-semibold text-start">{cardDetails.title}</h2>
+                    <p className="text-[0.8rem] mt-[0.6rem] text-start">{cardDetails.description}</p>
+                    <p className="text-[0.8rem] mt-[0.3rem] text-start">Date : {cardDetails.date}</p>
+                    <p className="text-[0.8rem] mt-[0.3rem] text-start">Location : {cardDetails.location}</p>
+                    <p className="text-[0.8rem] mt-[0.3rem] text-start">Price : {cardDetails.price}</p>
+                </div>
             </Box>
         </Modal>
     )

@@ -22,12 +22,13 @@ const Retreats = (props: RetreatsProps): JSX.Element => {
                             location={item.location}
                             description={item.description}
                             date={new Date(item.date * 1000).toLocaleDateString()}
+                            cardDetails={item}
                         />
                     </Grid>
                 ))}
             </Grid>
 
-            <Modals />
+
         </>
     )
 }
